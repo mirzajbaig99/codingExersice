@@ -1,0 +1,65 @@
+<div ng-controller="View1Ctrl" style="width:96%;margin-left:2%;margin-right:2%">
+    <h2>Personal</h2>
+   
+        <table class="table" style="background-color:#e3f5f6;border-radius:2%;">
+            <thead>
+                <tr>
+                    <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3" ng-click="GridOrderBy('FirstName')">
+                        First Name
+                    </th>
+                    <th class="col-xs-3 col-sm-3 col-md-3 col-lg-4" ng-click="GridOrderBy('LastName')">
+                        Last Name
+                    </th>
+                    <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3" ng-click="GridOrderBy('JobTitle')">
+                        Job Title
+                    </th>
+                    <th class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in personal | orderBy: personalOrderBy" ng-class-odd="'info'" id="tr_{{personal[$index].Id}}" name="tr_{{personal[$index].Id}}">
+                    <td class="col-xs-12 col-sm-12 col-md-12 col-lg-12" colspan="4">
+                        <form name="rowId{{x.Id}}" id="rowId{{x.Id}}">
+                            <table style="width:100%">
+                                <tr>
+                                    <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <span class="displayValue" id="FirstNameVal_{{x.Id}}">{{x.FirstName}}</span>
+                                        <span class="EditView" style="display:none;">
+                                            <input id="FirstName" name="FirstName" ng-model="FirstName" class="form-control" data-id="{{x.Id}}" value="{{x.FirstName}}" required>
+                                            <span class="text-danger" ng-show="rowId{{x.Id}}.FirstName.$touched && rowId{{x.Id}}.FirstName.$invalid">Feild is required.</span>
+                                        </span>
+                                    </td>
+                                    <td class="col-xs-3 col-sm-3 col-md-3 col-lg-4">
+                                        <span class="displayValue" id="LastNameVal_{{x.Id}}">{{x.LastName}}</span>
+                                        <span class="EditView" style="display:none;">
+                                            <input id="LastName" name="LastName" ng-model="LastName" class="form-control" data-id="{{x.Id}}" value="{{x.LastName}}" required>
+                                            <span class="text-danger" ng-show="rowId{{x.Id}}.LastName.$touched && rowId{{x.Id}}.LastName.$invalid">Feild is required.</span>
+                                        </span>
+                                    </td>
+                                    <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <span class="displayValue" id="JobTitleVal_{{x.Id}}">{{x.JobTitle}}</span>
+                                        <span class="EditView" style="display:none;">
+                                            <input id="JobTitle" name="JobTitle" ng-model="JobTitle" class="form-control" data-id="{{x.Id}}" value="{{x.JobTitle}}" required>
+                                            <span class="text-danger" ng-show="rowId{{x.Id}}.JobTitle.$touched && rowId{{x.Id}}.JobTitle.$invalid">Feild is required.</span>
+                                        </span>
+                                    </td>
+                                    <td class="col-xs-3 col-sm-3 col-md-3 col-lg-2" style="text-align:center">
+                                        <span id="btnBeforeUpdate">
+                                            <button type="button" class="btn btn-success btn-sm" data-id="{{x.Id}}" ng-click="Update($event)">Update</button>
+                                            <!--<button type="button" class="btn btn-danger btn-sm" action="D" data-id="{{x.Id}}" ng-click="Delete($event)">Delete</button>-->
+                                        </span>
+                                        <span id="btnInUpdate" style="display:none;">
+                                            <button type="button" ng-disabled="rowId{{x.Id}}.$invalid" class="btn btn-success btn-sm" action="U" data-id="{{x.Id}}" ng-click="Save($event)">Save</button>
+                                            <button type="button" class="btn btn-danger btn-sm" data-id="{{x.Id}}" ng-click="Cancel($event)">Cancel</button>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+
